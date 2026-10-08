@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ALaUneRouteImport } from './routes/a-la-une'
+import { Route as CultureRouteImport } from './routes/culture'
+import { Route as ScienceRouteImport } from './routes/science'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ArticleSlugRouteImport } from './routes/article.$slug'
+import { Route as DisciplineDRouteImport } from './routes/discipline.$d'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ALaUneRoute = ALaUneRouteImport.update({
+  id: '/a-la-une',
+  path: '/a-la-une',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CultureRoute = CultureRouteImport.update({
+  id: '/culture',
+  path: '/culture',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScienceRoute = ScienceRouteImport.update({
+  id: '/science',
+  path: '/science',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticleSlugRoute = ArticleSlugRouteImport.update({
+  id: '/article/$slug',
+  path: '/article/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisciplineDRoute = DisciplineDRouteImport.update({
+  id: '/discipline/$d',
+  path: '/discipline/$d',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-la-une': typeof ALaUneRoute
+  '/culture': typeof CultureRoute
+  '/science': typeof ScienceRoute
+  '/videos': typeof VideosRoute
+  '/article/$slug': typeof ArticleSlugRoute
+  '/discipline/$d': typeof DisciplineDRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-la-une': typeof ALaUneRoute
+  '/culture': typeof CultureRoute
+  '/science': typeof ScienceRoute
+  '/videos': typeof VideosRoute
+  '/article/$slug': typeof ArticleSlugRoute
+  '/discipline/$d': typeof DisciplineDRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a-la-une': typeof ALaUneRoute
+  '/culture': typeof CultureRoute
+  '/science': typeof ScienceRoute
+  '/videos': typeof VideosRoute
+  '/article/$slug': typeof ArticleSlugRoute
+  '/discipline/$d': typeof DisciplineDRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/a-la-une'
+    | '/culture'
+    | '/science'
+    | '/videos'
+    | '/article/$slug'
+    | '/discipline/$d'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/a-la-une'
+    | '/culture'
+    | '/science'
+    | '/videos'
+    | '/article/$slug'
+    | '/discipline/$d'
+  id:
+    | '__root__'
+    | '/'
+    | '/a-la-une'
+    | '/culture'
+    | '/science'
+    | '/videos'
+    | '/article/$slug'
+    | '/discipline/$d'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ALaUneRoute: typeof ALaUneRoute
+  CultureRoute: typeof CultureRoute
+  ScienceRoute: typeof ScienceRoute
+  VideosRoute: typeof VideosRoute
+  ArticleSlugRoute: typeof ArticleSlugRoute
+  DisciplineDRoute: typeof DisciplineDRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/a-la-une': {
+      id: '/a-la-une'
+      path: '/a-la-une'
+      fullPath: '/a-la-une'
+      preLoaderRoute: typeof ALaUneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/culture': {
+      id: '/culture'
+      path: '/culture'
+      fullPath: '/culture'
+      preLoaderRoute: typeof CultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/science': {
+      id: '/science'
+      path: '/science'
+      fullPath: '/science'
+      preLoaderRoute: typeof ScienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/article/$slug': {
+      id: '/article/$slug'
+      path: '/article/$slug'
+      fullPath: '/article/$slug'
+      preLoaderRoute: typeof ArticleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/discipline/$d': {
+      id: '/discipline/$d'
+      path: '/discipline/$d'
+      fullPath: '/discipline/$d'
+      preLoaderRoute: typeof DisciplineDRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ALaUneRoute: ALaUneRoute,
+  CultureRoute: CultureRoute,
+  ScienceRoute: ScienceRoute,
+  VideosRoute: VideosRoute,
+  ArticleSlugRoute: ArticleSlugRoute,
+  DisciplineDRoute: DisciplineDRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
