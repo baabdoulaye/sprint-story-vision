@@ -22,7 +22,7 @@ function Hero() {
   const a = articles[0]!;
   const items = [...tickerItems, ...tickerItems];
   return (
-    <VideoSection src={vs.hero.bgVideoUrl} poster={vs.hero.poster} className="min-h-screen items-end">
+    <VideoSection src={vs.hero.bgVideoUrl} poster={vs.hero.poster} className="min-h-screen items-end" animate={false}>
       <Kicker>{vs.hero.kicker}</Kicker>
       <h1 className="mt-4 max-w-6xl text-6xl uppercase leading-[0.9] md:text-[9rem]">{vs.hero.title}</h1>
       <p className="mt-6 max-w-2xl text-lg text-foreground/80">{vs.hero.text}</p>

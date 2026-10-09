@@ -11,13 +11,17 @@ export function BgVideo({ src, poster }: { src: string; poster: string }) {
   );
 }
 
-export function VideoSection({ src, poster, className = "", children }: { src: string; poster: string; className?: string; children: ReactNode }) {
+export function VideoSection({ src, poster, className = "", children, animate = true }: { src: string; poster: string; className?: string; children: ReactNode; animate?: boolean }) {
   return (
-    <section className={`relative isolate flex items-center overflow-hidden ${className}`}>
+    <section className={`relative isolate flex items-center overflow-hidden bg-background ${className}`}>
       <BgVideo src={src} poster={poster} />
-      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }} className="mx-auto w-full max-w-7xl px-4 py-16">
-        {children}
-      </motion.div>
+      {animate ? (
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5 }} className="mx-auto w-full max-w-7xl px-4 py-16">
+          {children}
+        </motion.div>
+      ) : (
+        <div className="mx-auto w-full max-w-7xl px-4 py-16">{children}</div>
+      )}
     </section>
   );
 }
