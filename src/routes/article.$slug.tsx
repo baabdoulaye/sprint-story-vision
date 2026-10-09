@@ -11,11 +11,11 @@ export const Route = createFileRoute("/article/$slug")({
     return { article };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Article introuvable — Burst Track" }, { name: "robots", content: "noindex" }] };
+    if (!loaderData) return { meta: [{ title: "Article introuvable — UNLEASHED" }, { name: "robots", content: "noindex" }] };
     const a = loaderData.article;
     return {
       meta: [
-        { title: `${a.title} — Burst Track Media` },
+        { title: `${a.title} — UNLEASHED` },
         { name: "description", content: a.excerpt },
         { property: "og:title", content: a.title },
         { property: "og:description", content: a.excerpt },

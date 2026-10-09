@@ -9,9 +9,9 @@ import { ArticleCard, CategoryBadge, SectionTitle, VideoGrid } from "@/component
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Burst Track Media — Le média 100% sprint" },
+      { title: "UNLEASHED — Le média 100% sprint" },
       { name: "description", content: "Actualités, chronos, analyses biomécaniques et vidéos slow-mo du sprint : 60m, 100m, 200m, 400m et relais." },
-      { property: "og:title", content: "Burst Track Media — Le média 100% sprint" },
+      { property: "og:title", content: "UNLEASHED — Le média 100% sprint" },
       { property: "og:description", content: "Le média immersif dédié au sprint en athlétisme." },
     ],
   }),

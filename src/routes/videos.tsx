@@ -5,9 +5,9 @@ import { SectionTitle, VideoGrid } from "@/components/site/Cards";
 export const Route = createFileRoute("/videos")({
   head: () => ({
     meta: [
-      { title: "Vidéos & Analyses — Burst Track Media" },
+      { title: "Vidéos & Analyses — UNLEASHED" },
       { name: "description", content: "Ralentis 240fps, finales et analyses vidéo du sprint." },
-      { property: "og:title", content: "Vidéos & Analyses — Burst Track Media" },
+      { property: "og:title", content: "Vidéos & Analyses — UNLEASHED" },
       { property: "og:description", content: "Ralentis 240fps, finales et analyses vidéo du sprint." },
     ],
   }),

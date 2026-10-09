@@ -70,7 +70,7 @@ export function Header() {
           <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground glow-primary">
             <Zap className="h-5 w-5" fill="currentColor" />
           </span>
-          <span className="font-display text-2xl uppercase italic leading-none">Burst<span className="text-primary">Track</span></span>
+          <span className="font-display text-2xl uppercase italic leading-none">Unleashed<span className="text-primary">.</span></span>
         </Link>
         <nav className="hidden items-center gap-6 xl:flex">
           {nav.slice(0, 2).map((n) => <Link key={n.to} to={n.to} className={linkCls} activeProps={active} activeOptions={{ exact: true }}>{n.label}</Link>)}
@@ -108,7 +108,7 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-border">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-12 md:flex-row md:items-center">
-        <p className="font-display text-4xl uppercase italic">Burst<span className="text-primary">Track</span> Media</p>
+        <p className="font-display text-4xl uppercase italic">Unleashed<span className="text-primary">.</span></p>
         <p className="text-sm text-muted-foreground">100% sprint. 60m · 100m · 200m · 400m · 4x100m. © 2026</p>
       </div>
     </footer>
