@@ -38,7 +38,7 @@ function SearchBox({ onDone }: { onDone?: () => void }) {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Rechercher un chrono, un article…"
-        className="w-full rounded-full border border-input bg-secondary py-2 pl-9 pr-4 text-sm outline-none focus:border-primary focus:glow-primary lg:w-64"
+        className="w-full rounded-full border border-input bg-secondary py-2 pl-9 pr-4 text-sm outline-none focus:border-primary lg:w-64"
       />
       {results.length > 0 && (
         <div className="absolute right-0 top-12 z-50 w-full min-w-80 overflow-hidden rounded-lg border border-border bg-popover shadow-xl">
@@ -67,7 +67,7 @@ export function Header() {
       <Ticker />
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4">
         <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground glow-primary">
+          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground">
             <Zap className="h-5 w-5" fill="currentColor" />
           </span>
           <span className="font-display text-2xl uppercase italic leading-none">Unleashed<span className="text-primary">.</span></span>

@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion, useScroll } from "framer-motion";
 import { Clock, Quote } from "lucide-react";
 import { articles, relativeTime } from "@/data/mockData";
+import { BgVideo } from "@/components/site/VideoSection";
 import { ArticleCard, CategoryBadge } from "@/components/site/Cards";
 
 export const Route = createFileRoute("/article/$slug")({
@@ -38,9 +39,8 @@ function ArticlePage() {
   return (
     <main>
       <motion.div style={{ scaleX: scrollYProgress }} className="fixed left-0 right-0 top-0 z-50 h-1 origin-left bg-primary" />
-      <section className="relative flex min-h-[80vh] items-end overflow-hidden">
-        <img src={a.image} alt={a.title} className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-fade" />
+      <section className="relative isolate flex min-h-[80vh] items-end overflow-hidden">
+        <BgVideo src={a.videoUrl} poster={a.image} />
         <div className="relative mx-auto w-full max-w-5xl px-4 pb-14">
           <CategoryBadge>{a.category}</CategoryBadge>
           <h1 className="mt-4 text-4xl uppercase leading-[0.95] md:text-7xl">{a.title}</h1>
@@ -61,7 +61,7 @@ function ArticlePage() {
               </blockquote>
             );
             case "box": return (
-              <aside key={i} className="my-10 rounded-xl border border-primary/40 bg-card p-6 glow-primary">
+              <aside key={i} className="my-10 rounded-xl border border-primary/40 bg-card p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">{b.title}</p>
                 <p className="mt-3 leading-relaxed">{b.text}</p>
               </aside>
