@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Search, Timer, X, Zap } from "lucide-react";
+import { Menu, Search, Timer, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { articles, disciplines, tickerItems } from "@/data/mockData";
 
@@ -15,9 +15,13 @@ const nav = [
 export function Ticker() {
   const items = [...tickerItems, ...tickerItems];
   return (
-    <div className="overflow-hidden border-b border-border bg-track text-track-foreground">
-      <div className="flex w-max animate-marquee gap-10 py-1.5 text-xs font-semibold uppercase tracking-wider">
-        {items.map((t, i) => <span key={i} className="whitespace-nowrap">{t}</span>)}
+    <div className="overflow-hidden border-b border-border/40 bg-track text-track-foreground">
+      <div className="flex w-max animate-marquee gap-0 py-1 text-[11px] font-semibold uppercase tracking-wider">
+        {items.map((t, i) => (
+          <span key={i} className="whitespace-nowrap after:px-6 after:content-['|'] after:text-track-foreground/30">
+            {t}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -58,20 +62,23 @@ function SearchBox({ onDone }: { onDone?: () => void }) {
   );
 }
 
+export function Logo({ className = "" }: { className?: string }) {
+  return (
+    <Link to="/" className={`group flex items-baseline gap-0.5 font-display uppercase leading-none ${className}`}>
+      <span className="text-2xl font-bold tracking-tight transition-colors group-hover:text-primary md:text-3xl">UNLEASHED</span>
+      <span className="text-xl text-primary transition-transform group-hover:scale-125 md:text-2xl">/</span>
+    </Link>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const linkCls = "text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-primary";
   const active = { className: "!text-primary" };
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
-      <Ticker />
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground">
-            <Zap className="h-5 w-5" fill="currentColor" />
-          </span>
-          <span className="font-display text-2xl uppercase italic leading-none">Unleashed<span className="text-primary">.</span></span>
-        </Link>
+        <Logo />
         <nav className="hidden items-center gap-6 xl:flex">
           {nav.slice(0, 2).map((n) => <Link key={n.to} to={n.to} className={linkCls} activeProps={active} activeOptions={{ exact: true }}>{n.label}</Link>)}
           <div className="group relative">
@@ -104,12 +111,130 @@ export function Header() {
   );
 }
 
+const footerNavCol2 = [
+  { to: "/", label: "Accueil" },
+  { to: "/discipline/$d", params: { d: "60m" }, label: "60m & 100m" },
+  { to: "/science", label: "Biomécanique" },
+  { to: "/culture", label: "Pointes & Spikes" },
+  { to: "/videos", label: "Analyses Vidéos" },
+];
+
+const footerLegalCol3 = [
+  { to: "/mentions-legales", label: "Mentions légales" },
+  { to: "/politique-de-confidentialite", label: "Politique de confidentialité" },
+  { to: "/cookies", label: "Gestion des cookies" },
+  { to: "/contact", label: "Contact" },
+];
+
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.7l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z" />
+    </svg>
+  );
+}
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19.6 6.7a5.6 5.6 0 0 1-3.4-1.2 5.6 5.6 0 0 1-2.1-3.8h-3v12.3a2.7 2.7 0 1 1-2-2.6V8.4a5.6 5.6 0 1 0 5 5.5V8.8a8.5 8.5 0 0 0 5.5 2V7.6c-.1 0-.1 0 0-.9z" />
+    </svg>
+  );
+}
+
+const socialLinks = [
+  { href: "https://youtube.com", label: "YouTube", Icon: YouTubeIcon },
+  { href: "https://instagram.com", label: "Instagram", Icon: InstagramIcon },
+  { href: "https://twitter.com", label: "X", Icon: XIcon },
+  { href: "https://tiktok.com", label: "TikTok", Icon: TikTokIcon },
+];
+
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-12 md:flex-row md:items-center">
-        <p className="font-display text-4xl uppercase italic">Unleashed<span className="text-primary">.</span></p>
-        <p className="text-sm text-muted-foreground">100% sprint. 60m · 100m · 200m · 400m · 4x100m. © 2026</p>
+    <footer className="mt-24 border-t border-border bg-card/30">
+      <div className="mx-auto max-w-7xl px-4 py-16">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col gap-4">
+            <Logo />
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+              Le média 100% sprint. Dédié à la culture du sprint court et de la vitesse pure : 60m, 100m, 200m, 400m et relais. Chronos, biomécanique, matériel et mental — tout ce qui sépare une finale d'un record.
+            </p>
+            <p className="mt-auto text-xs text-muted-foreground/60">© 2026 UNLEASHED. Tous droits réservés.</p>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Rubriques</h4>
+            <ul className="flex flex-col gap-3">
+              {footerNavCol2.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.to as any}
+                    params={item.params as any}
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Informations légales</h4>
+            <ul className="flex flex-col gap-3">
+              {footerLegalCol3.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.to as any}
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Communauté</h4>
+            <div className="flex gap-3">
+              {socialLinks.map((s) => {
+                const Icon = s.Icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted-foreground transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">@unleashed_sprint</p>
+          </div>
+        </div>
       </div>
     </footer>
   );

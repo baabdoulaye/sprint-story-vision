@@ -30,8 +30,8 @@ function Hero() {
         Lire le dossier <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </Link>
       <div className="mt-14 overflow-hidden border-y border-foreground/20">
-        <div className="flex w-max animate-marquee gap-12 py-3 font-display text-lg uppercase tracking-wide text-foreground/80">
-          {items.map((t, i) => <span key={i} className="whitespace-nowrap">{t}</span>)}
+        <div className="flex w-max animate-marquee gap-0 py-3 font-display text-lg uppercase tracking-wide text-foreground/80">
+          {items.map((t, i) => <span key={i} className="whitespace-nowrap after:px-8 after:content-['|'] after:text-foreground/25">{t}</span>)}
         </div>
       </div>
     </VideoSection>

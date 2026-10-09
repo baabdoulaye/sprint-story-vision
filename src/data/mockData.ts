@@ -46,13 +46,14 @@ const V3 = "https://videos.pexels.com/video-files/5319093/5319093-hd_1920_1080_2
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600_000).toISOString();
 
 export const tickerItems = [
-  "UNLEASHED — 100% sprint",
-  "⚡ Diamond League Zurich : 9.79s sur 100m",
-  "🔥 Meeting de Paris : nouveau record du monde U20 sur 200m — 19.69s",
-  "⏱ 60m en salle : 6.41s, meilleure perf mondiale de l'année",
-  "🏁 Relais 4x100m : la Jamaïque signe 37.31s à Kingston",
-  "🚀 400m : 43.74s, le chrono qui fait trembler la légende",
-  "📈 Temps de réaction record : 0.101s validé à Eugene",
+  "RECORDS DU MONDE",
+  "60M SALLE : 6.34s",
+  "100M : 9.58s",
+  "200M : 19.19s",
+  "BIOMÉCANIQUE DE POUSSÉE",
+  "SPLIT 30M : 3.78s",
+  "FRÉQUENCE DE FOULÉE : 4.8 Hz",
+  "CONTACT AU SOL : 0.09s",
 ];
 
 export const articles: Article[] = [
@@ -242,11 +243,95 @@ export const spikeModels: SpikeModel[] = [
   { id: "s4", name: "Plaque carbone", era: "2020+", weight: "~130 g", story: "Mousse haute restitution et plaque rigide : la révolution actuelle.", image: spikes },
 ];
 
+export interface VideoAnalysis {
+  id: string;
+  title: string;
+  kicker: string;
+  description: string;
+  detailedAnalysis: string;
+  duration: string;
+  badge: string;
+  thumbnail: string;
+  videoUrl: string;
+  stats: { label: string; value: string }[];
+}
+
 export const videos: Video[] = [
   { id: "v1", title: "Départ décortiqué en 240fps", description: "Chaque appui des 10 premiers mètres au ralenti.", duration: "03:45", badge: "Slow-Mo 240fps", thumbnail: hero, videoUrl: V1 },
   { id: "v2", title: "Finale 100m : le coude-à-coude", description: "La photo-finish la plus serrée de la saison.", duration: "02:12", badge: "4K", thumbnail: finish, videoUrl: V2 },
   { id: "v3", title: "Test des pointes carbone", description: "Laboratoire : mesure du retour d'énergie.", duration: "06:30", badge: "Analyse", thumbnail: spikes, videoUrl: V3 },
   { id: "v4", title: "Chambre d'appel : 20 minutes", description: "Immersion dans la tête d'une finaliste.", duration: "08:04", badge: "Docu", thumbnail: mental, videoUrl: V1 },
+];
+
+export const videoAnalyses: VideoAnalysis[] = [
+  {
+    id: "va1",
+    title: "Départ décortiqué en 240fps",
+    kicker: "Biomécanique du départ",
+    description: "Chaque appui des 10 premiers mètres au ralenti : angles de poussée, trajectoires du centre de masse, synchronisation des bras.",
+    detailedAnalysis: "Capturé à 240 images par seconde, ce ralenti révèle ce que l'œil nu ne peut percevoir. La séquence débute au coup de pistolet : les deux cales sont poussées simultanément, avec une force horizontale dépassant 2,5 fois le poids du corps. Le genou avant, fléchi à 90°, se propulse en premier. La jambe arrière quitte le bloc 0.04s plus tard. Les bras s'opposent pour équilibrer la rotation du tronc, qui reste incliné à 45° sur les trois premiers appuis. L'analyse frame par frame montre un temps de contact au sol de 0.09s dès le quatrième appui, signe d'une raideur tendineuse exceptionnelle. La projection du centre de masse avance progressivement : de 25 cm derrière le premier appui à 10 cm au cinquième. Cette géométrie « en montée » est la signature des élites : on ne se redresse pas, on monte les marches.",
+    duration: "03:45",
+    badge: "Slow-Mo 240fps",
+    thumbnail: hero,
+    videoUrl: V1,
+    stats: [
+      { label: "Temps de réaction", value: "0.128s" },
+      { label: "Angle genou avant", value: "90°" },
+      { label: "Contact au sol", value: "0.09s" },
+      { label: "Force horizontale", value: "2.5× poids" },
+    ],
+  },
+  {
+    id: "va2",
+    title: "Finale 100m : le coude-à-coude",
+    kicker: "Photo-finish & tactique",
+    description: "La photo-finish la plus serrée de la saison : deux athlètes séparés par un millième de seconde sur la ligne.",
+    detailedAnalysis: "À 12 m/s en vitesse de pointe, un millième de seconde représente 1,2 centimètre — l'épaisseur d'un torse penché. Cette finale illustre l'importance du penché final : l'athlète à droite bombe le torse et franchit la ligne 0.001s avant son rival, qui a une vitesse linéaire légèrement supérieure mais un buste plus droit. L'analyse des 20 derniers mètres révèle deux stratégies opposées : le couloir 4 maintient sa fréquence de foulée (4.6 Hz) et réduit l'amplitude, tandis que le couloir 5 conserve son amplitude mais perd 0.2 Hz de fréquence. Le premier subit moins de décélération aérodynamique car son centre de masse reste plus bas. Les données GPS montrent un pic de vitesse à 43.2 km/h au 70e mètre, puis une décroissance de 1.8% sur les 30 derniers mètres — un profil typique des finales de haut niveau.",
+    duration: "02:12",
+    badge: "4K",
+    thumbnail: finish,
+    videoUrl: V2,
+    stats: [
+      { label: "Vitesse de pointe", value: "43.2 km/h" },
+      { label: "Écart final", value: "0.001s" },
+      { label: "Fréquence foulée", value: "4.6 Hz" },
+      { label: "Décélération", value: "1.8%" },
+    ],
+  },
+  {
+    id: "va3",
+    title: "Test des pointes carbone en laboratoire",
+    kicker: "Matériel & innovation",
+    description: "Mesure du retour d'énergie des plaques carbone : comparaison entre trois générations de pointes de sprint.",
+    detailedAnalysis: "Sur un banc d'essai instrumenté, trois pointes sont testées sous une charge de 1 800 N — équivalent à la force d'impact d'un sprinteur élite au premier appui. La pointe traditionnelle (cuir, 1996) restitue 62% de l'énergie. La première génération à plaque carbone (2018) atteint 74%. Le modèle actuel (2020+) affiche 81%, grâce à une mousse PEBA à haut retour et une plaque en nid d'abeille qui raide la cheville sans bloquer la flexion naturelle. La différence se traduit sur la piste : sur 400m, le gain estimé est de l'ordre de 1%, soit environ 0.4s — non négligeable au plus haut niveau. Le débat éthique reste ouvert : ces chaussures rapprochent-elles artificiellement les chronos, ou s'inscrivent-elles dans la continuité naturelle du progrès matériel, comme les pistes synthétiques dans les années 1960 ?",
+    duration: "06:30",
+    badge: "Analyse labo",
+    thumbnail: spikes,
+    videoUrl: V3,
+    stats: [
+      { label: "Retour d'énergie", value: "81%" },
+      { label: "Épaisseur semelle", value: "20 mm" },
+      { label: "Poids pointe", value: "130 g" },
+      { label: "Gain estimé 400m", value: "~0.4s" },
+    ],
+  },
+  {
+    id: "va4",
+    title: "Chambre d'appel : 20 minutes",
+    kicker: "Psychologie & mental",
+    description: "Immersion dans la tête d'une finaliste : la préparation mentale avant le départ le plus intense du sport.",
+    detailedAnalysis: "Vingt minutes. C'est le temps moyen passé en chambre d'appel avant une finale majeure. La caméra suit une finaliste de 200m, de l'entrée en chambre à la présentation sur la piste. Première phase : isolation sensorielle, casque sur les oreilles, respiration 4-7-8 pour abaisser la fréquence cardiaque sous les 100 bpm. À T-10 minutes, la fréquence remonte naturellement à 120+ bpm — l'organisme se prépare à l'effort explosif. La routine comprend trois visualisations du départ, une activation musculaire progressive (ischios, quadriceps, mollets) et des mots-clés internes : « pousse », « relâche », « ton torse ». La dernière minute est la plus critique : la règle du zéro faux départ transforme toute fausse sortie en élimination immédiate. Le préparateur mental insiste sur la bulle attentionnelle : réduire le champ de conscience aux seuls indices pertinents — le son du pistolet, la position des cales, le premier appui — et ignorer le reste. Les sept autres athlètes ne sont plus des adversaires, mais du décor.",
+    duration: "08:04",
+    badge: "Documentaire",
+    thumbnail: mental,
+    videoUrl: V1,
+    stats: [
+      { label: "Durée chambre d'appel", value: "20 min" },
+      { label: "FC au repos", value: "95 bpm" },
+      { label: "FC avant départ", value: "120+ bpm" },
+      { label: "Faux départ toléré", value: "0" },
+    ],
+  },
 ];
 
 export const categories = ["Tous", "Diamond League", "Biomécanique", "Matériel & Pointes", "JO & Mondiaux"] as const;
