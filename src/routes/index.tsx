@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Hero() {
-  const a = articles[0];
+  const a = articles[0]!;
   return (
     <section className="relative flex min-h-[88vh] items-end overflow-hidden">
       <img src={hero} alt="" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover" />
@@ -57,7 +57,7 @@ function SplitVideo() {
   return (
     <section className="mx-auto grid max-w-7xl gap-10 px-4 py-24 lg:grid-cols-5">
       <div className="relative overflow-hidden rounded-xl border border-border lg:col-span-3">
-        <video ref={ref} src={articles[2].videoUrl} poster={articles[1].image} muted={muted} loop playsInline className="aspect-video h-full w-full object-cover" />
+        <video ref={ref} src={articles[2]!.videoUrl} poster={articles[1]!.image} muted={muted} loop playsInline className="aspect-video h-full w-full object-cover" />
         <span className="absolute right-3 top-3"><CategoryBadge>4K</CategoryBadge></span>
         <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 bg-fade p-4">
           <button onClick={toggle} aria-label="Lecture" className="grid h-11 w-11 place-items-center rounded-full bg-primary text-primary-foreground glow-primary">{playing ? <Pause /> : <Play fill="currentColor" />}</button>
