@@ -19,14 +19,20 @@ function CookiesPage() {
 
       <div className="mt-10 space-y-8 text-sm leading-relaxed text-foreground/80">
         <section>
-          <h2 className="text-xl font-bold uppercase text-foreground">Qu'est-ce qu'un cookie ?</h2>
+          <h2 className="text-xl font-normal uppercase text-foreground">
+            Qu'est-ce qu'un cookie ?
+          </h2>
           <p className="mt-3">
-            Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site web. Il permet au site de mémoriser certaines informations relatives à votre navigation.
+            Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un
+            site web. Il permet au site de mémoriser certaines informations relatives à votre
+            navigation.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold uppercase text-foreground">Cookies utilisés sur UNLEASHED</h2>
+          <h2 className="text-xl font-normal uppercase text-foreground">
+            Cookies utilisés sur UNLEASHED
+          </h2>
           <div className="mt-4 overflow-x-auto rounded-lg border border-border">
             <table className="w-full min-w-[500px] text-left">
               <thead className="bg-secondary text-xs uppercase tracking-wider text-muted-foreground">
@@ -44,12 +50,16 @@ function CookiesPage() {
                 </tr>
                 <tr className="border-t border-border">
                   <td className="p-3 font-semibold">theme_pref</td>
-                  <td className="p-3 text-muted-foreground">Mémorisation du thème (sombre/clair)</td>
+                  <td className="p-3 text-muted-foreground">
+                    Mémorisation du thème (sombre/clair)
+                  </td>
                   <td className="p-3 text-muted-foreground">1 an</td>
                 </tr>
                 <tr className="border-t border-border">
                   <td className="p-3 font-semibold">analytics_id</td>
-                  <td className="p-3 text-muted-foreground">Statistiques de fréquentation anonymisées</td>
+                  <td className="p-3 text-muted-foreground">
+                    Statistiques de fréquentation anonymisées
+                  </td>
                   <td className="p-3 text-muted-foreground">13 mois</td>
                 </tr>
               </tbody>
@@ -58,9 +68,13 @@ function CookiesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold uppercase text-foreground">Gestion de vos préférences</h2>
+          <h2 className="text-xl font-normal uppercase text-foreground">
+            Gestion de vos préférences
+          </h2>
           <p className="mt-3">
-            Vous pouvez à tout moment configurer votre navigateur pour accepter, refuser ou supprimer les cookies. Voici les liens vers les pages d'aide des principaux navigateurs :
+            Vous pouvez à tout moment configurer votre navigateur pour accepter, refuser ou
+            supprimer les cookies. Voici les liens vers les pages d'aide des principaux navigateurs
+            :
           </p>
           <ul className="mt-3 list-disc space-y-1 pl-6">
             <li>Google Chrome : Paramètres &gt; Confidentialité et sécurité &gt; Cookies</li>
@@ -71,9 +85,11 @@ function CookiesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold uppercase text-foreground">Conséquences du refus</h2>
+          <h2 className="text-xl font-normal uppercase text-foreground">Conséquences du refus</h2>
           <p className="mt-3">
-            Le refus des cookies fonctionnels peut altérer certaines fonctionnalités du site. Les cookies de mesure d'audience étant anonymisés, leur refus n'impacte pas votre expérience de lecture.
+            Le refus des cookies fonctionnels peut altérer certaines fonctionnalités du site. Les
+            cookies de mesure d'audience étant anonymisés, leur refus n'impacte pas votre expérience
+            de lecture.
           </p>
         </section>
       </div>
