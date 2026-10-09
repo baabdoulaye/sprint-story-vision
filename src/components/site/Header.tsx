@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Search, Timer, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { articles, disciplines, tickerItems } from "@/data/mockData";
+import { articles, tickerItems } from "@/data/mockData";
 
 const nav = [
   { to: "/", label: "Accueil" },
@@ -92,42 +92,20 @@ export function Header() {
   const linkCls =
     "text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-primary";
   const active = { className: "!text-primary" };
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4">
         <Logo />
         <nav className="hidden items-center gap-6 xl:flex">
-          {nav.slice(0, 2).map((n) => (
+          {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
               className={linkCls}
               activeProps={active}
-              activeOptions={{ exact: true }}
+              activeOptions={{ exact: n.to === "/" }}
             >
-              {n.label}
-            </Link>
-          ))}
-          <div className="group relative">
-            <button className={linkCls + " flex items-center gap-1"}>
-              <Timer className="h-4 w-4" />
-              Discipline
-            </button>
-            <div className="invisible absolute left-0 top-full flex gap-1 rounded-lg border border-border bg-popover p-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-              {disciplines.map((d) => (
-                <Link
-                  key={d}
-                  to="/discipline/$d"
-                  params={{ d }}
-                  className="rounded-md px-3 py-1.5 font-display text-lg hover:bg-primary hover:text-primary-foreground"
-                >
-                  {d}
-                </Link>
-              ))}
-            </div>
-          </div>
-          {nav.slice(2).map((n) => (
-            <Link key={n.to} to={n.to} className={linkCls} activeProps={active}>
               {n.label}
             </Link>
           ))}
@@ -139,6 +117,7 @@ export function Header() {
           {open ? <X /> : <Menu />}
         </button>
       </div>
+
       <AnimatePresence>
         {open && (
           <motion.div
@@ -156,24 +135,11 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="font-display text-3xl uppercase"
                   activeProps={active}
-                  activeOptions={{ exact: true }}
+                  activeOptions={{ exact: n.to === "/" }}
                 >
                   {n.label}
                 </Link>
               ))}
-              <div className="flex flex-wrap gap-2">
-                {disciplines.map((d) => (
-                  <Link
-                    key={d}
-                    to="/discipline/$d"
-                    params={{ d }}
-                    onClick={() => setOpen(false)}
-                    className="rounded-full border border-primary px-4 py-1 font-display text-primary"
-                  >
-                    {d}
-                  </Link>
-                ))}
-              </div>
             </div>
           </motion.div>
         )}
@@ -184,7 +150,7 @@ export function Header() {
 
 const footerNavCol2 = [
   { to: "/", label: "Accueil" },
-  { to: "/discipline/$d", params: { d: "60m" }, label: "60m & 100m" },
+  { to: "/a-la-une", label: "À la Une" },
   { to: "/science", label: "Biomécanique" },
   { to: "/culture", label: "Pointes & Spikes" },
   { to: "/videos", label: "Analyses Vidéos" },
@@ -212,9 +178,9 @@ function InstagramIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
       <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -273,7 +239,6 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     to={item.to as any}
-                    params={item.params as any}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {item.label}
