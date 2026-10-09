@@ -46,6 +46,7 @@ const V3 = "https://videos.pexels.com/video-files/5319093/5319093-hd_1920_1080_2
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600_000).toISOString();
 
 export const tickerItems = [
+  "UNLEASHED — 100% sprint",
   "⚡ Diamond League Zurich : 9.79s sur 100m",
   "🔥 Meeting de Paris : nouveau record du monde U20 sur 200m — 19.69s",
   "⏱ 60m en salle : 6.41s, meilleure perf mondiale de l'année",
@@ -192,6 +193,53 @@ export const articles: Article[] = [
       { type: "p", text: "Avec la règle du zéro faux départ, la gestion de l'excitation est devenue une compétence à part entière. Trop d'adrénaline, et c'est l'élimination. Pas assez, et c'est un départ manqué." },
     ],
   },
+];
+
+export interface VideoSection {
+  id: string;
+  kicker: string;
+  title: string;
+  text: string;
+  bgVideoUrl: string;
+  poster: string;
+}
+
+export const videoSections: Record<"hero" | "biomeca" | "finish" | "training" | "manifesto", VideoSection> = {
+  hero: { id: "hero", kicker: "Le dossier", title: "Libérer la vitesse", text: "Dans les 0,5 premières secondes d'un 100m, tout se décide. Enquête au cœur du départ parfait.", bgVideoUrl: V1, poster: hero },
+  biomeca: { id: "biomeca", kicker: "Décryptage biomécanique", title: "Les 30 premiers mètres", text: "De 0 à 40 km/h en moins de 4 secondes : inclinaison du buste, temps de contact au sol, puissance horizontale. Le sprinteur monte les marches, appui après appui, jusqu'à se redresser.", bgVideoUrl: V3, poster: hero },
+  finish: { id: "finish", kicker: "L'instant photo-finish", title: "La quête du millième", text: "À 12 m/s, un millième de seconde représente 1,2 centimètre. C'est l'épaisseur d'un torse penché qui sépare l'or de l'oubli.", bgVideoUrl: V2, poster: finish },
+  training: { id: "training", kicker: "Entraînement & puissance brute", title: "Forger l'explosivité", text: "Force maximale, pliométrie, charges d'impact : la vitesse se construit d'abord loin de la piste, sous la barre et sur les haies basses.", bgVideoUrl: V1, poster: spikes },
+  manifesto: { id: "manifesto", kicker: "Manifeste", title: "Dix secondes. Une vie entière.", text: "Le sprint ne pardonne rien et ne promet rien. Il exige tout, tout de suite. C'est pour ça qu'on l'aime.", bgVideoUrl: V2, poster: mental },
+};
+
+export interface RankingRow { rank: number; athlete: string; country: string; time: string; splits: string; year: number }
+export const rankings: Record<"60m" | "100m" | "200m", RankingRow[]> = {
+  "60m": [
+    { rank: 1, athlete: "Christian Coleman", country: "USA", time: "6.34", splits: "10m 1.70 · 30m 3.78", year: 2018 },
+    { rank: 2, athlete: "Maurice Greene", country: "USA", time: "6.39", splits: "10m 1.73 · 30m 3.82", year: 2001 },
+    { rank: 3, athlete: "Ronnie Baker", country: "USA", time: "6.40", splits: "10m 1.72 · 30m 3.83", year: 2018 },
+    { rank: 4, athlete: "Marcell Jacobs", country: "ITA", time: "6.41", splits: "10m 1.74 · 30m 3.84", year: 2022 },
+  ],
+  "100m": [
+    { rank: 1, athlete: "Usain Bolt", country: "JAM", time: "9.58", splits: "50m 5.47 · 80m 7.92", year: 2009 },
+    { rank: 2, athlete: "Tyson Gay", country: "USA", time: "9.69", splits: "50m 5.50 · 80m 7.99", year: 2009 },
+    { rank: 3, athlete: "Yohan Blake", country: "JAM", time: "9.69", splits: "50m 5.52 · 80m 8.00", year: 2012 },
+    { rank: 4, athlete: "Asafa Powell", country: "JAM", time: "9.72", splits: "50m 5.53 · 80m 8.02", year: 2008 },
+  ],
+  "200m": [
+    { rank: 1, athlete: "Usain Bolt", country: "JAM", time: "19.19", splits: "100m 9.92 · 150m 14.40", year: 2009 },
+    { rank: 2, athlete: "Yohan Blake", country: "JAM", time: "19.26", splits: "100m 10.08 · 150m 14.52", year: 2011 },
+    { rank: 3, athlete: "Noah Lyles", country: "USA", time: "19.31", splits: "100m 10.06 · 150m 14.55", year: 2022 },
+    { rank: 4, athlete: "Michael Johnson", country: "USA", time: "19.32", splits: "100m 10.12 · 150m 14.60", year: 1996 },
+  ],
+};
+
+export interface SpikeModel { id: string; name: string; era: string; weight: string; story: string; image: string }
+export const spikeModels: SpikeModel[] = [
+  { id: "s1", name: "La pointe cuir", era: "1936", weight: "~350 g", story: "Cuir cousu main, clous fixes : la chaussure de Jesse Owens à Berlin.", image: spikes },
+  { id: "s2", name: "L'ère synthétique", era: "1968", weight: "~220 g", story: "Arrivée du tartan à Mexico et des semelles à clous vissés.", image: hero },
+  { id: "s3", name: "La pointe or", era: "1996", weight: "~110 g", story: "Une pointe dorée ultra-légère pour un 19.32 historique à Atlanta.", image: finish },
+  { id: "s4", name: "Plaque carbone", era: "2020+", weight: "~130 g", story: "Mousse haute restitution et plaque rigide : la révolution actuelle.", image: spikes },
 ];
 
 export const videos: Video[] = [

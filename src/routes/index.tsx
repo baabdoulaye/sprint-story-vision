@@ -1,18 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Clock, Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
-import { useRef, useState } from "react";
-import hero from "@/assets/hero.jpg";
-import { articles, categories, videos } from "@/data/mockData";
-import { ArticleCard, CategoryBadge, SectionTitle, VideoGrid } from "@/components/site/Cards";
+import { motion } from "framer-motion";
+import { ArrowRight, Clock } from "lucide-react";
+import { useState } from "react";
+import { articles, rankings, spikeModels, tickerItems, videoSections as vs } from "@/data/mockData";
+import { ArticleCard, CategoryBadge, SectionTitle } from "@/components/site/Cards";
+import { Kicker, VideoSection } from "@/components/site/VideoSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Burst Track Media — Le média 100% sprint" },
-      { name: "description", content: "Actualités, chronos, analyses biomécaniques et vidéos slow-mo du sprint : 60m, 100m, 200m, 400m et relais." },
-      { property: "og:title", content: "Burst Track Media — Le média 100% sprint" },
-      { property: "og:description", content: "Le média immersif dédié au sprint en athlétisme." },
+      { title: "UNLEASHED — Le magazine du sprint" },
+      { name: "description", content: "Enquêtes, chronos, biomécanique et culture du sprint : 60m, 100m, 200m, 400m et relais." },
+      { property: "og:title", content: "UNLEASHED — Le magazine du sprint" },
+      { property: "og:description", content: "Le magazine éditorial premium dédié au sprint en athlétisme." },
     ],
   }),
   component: Home,
@@ -20,89 +20,198 @@ export const Route = createFileRoute("/")({
 
 function Hero() {
   const a = articles[0]!;
+  const items = [...tickerItems, ...tickerItems];
   return (
-    <section className="relative flex min-h-[88vh] items-end overflow-hidden">
-      <img src={hero} alt="" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover" />
-      <video src={a.videoUrl} autoPlay muted loop playsInline poster={hero} className="absolute inset-0 h-full w-full object-cover opacity-60" />
-      <div className="absolute inset-0 bg-fade" />
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-16">
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <span className="inline-flex items-center gap-2 rounded-sm bg-track px-3 py-1 text-xs font-bold uppercase tracking-widest text-track-foreground glow-track">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-track-foreground" /> Flash Info
-          </span>
-          <h1 className="mt-5 max-w-5xl text-5xl uppercase leading-[0.95] md:text-8xl">{a.title}</h1>
-          <p className="mt-5 line-clamp-2 max-w-2xl text-lg text-muted-foreground">{a.excerpt}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-6">
-            <Link to="/article/$slug" params={{ slug: a.slug }} className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-bold uppercase text-primary-foreground transition-all hover:glow-primary">
-              Lire l'enquête complète <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <span className="text-sm text-muted-foreground">Par <b className="text-foreground">{a.author}</b> · <Clock className="inline h-3.5 w-3.5" /> {a.readTime} min</span>
-          </div>
-        </motion.div>
+    <VideoSection src={vs.hero.bgVideoUrl} poster={vs.hero.poster} className="min-h-screen items-end">
+      <Kicker>{vs.hero.kicker}</Kicker>
+      <h1 className="mt-4 max-w-6xl text-6xl uppercase leading-[0.9] md:text-[9rem]">{vs.hero.title}</h1>
+      <p className="mt-6 max-w-2xl text-lg text-foreground/80">{vs.hero.text}</p>
+      <Link to="/article/$slug" params={{ slug: a.slug }} className="group mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 font-bold uppercase text-background transition-colors hover:bg-primary hover:text-primary-foreground">
+        Lire le dossier <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+      </Link>
+      <div className="mt-14 overflow-hidden border-y border-foreground/20">
+        <div className="flex w-max animate-marquee gap-12 py-3 font-display text-lg uppercase tracking-wide text-foreground/80">
+          {items.map((t, i) => <span key={i} className="whitespace-nowrap">{t}</span>)}
+        </div>
+      </div>
+    </VideoSection>
+  );
+}
+
+function FlashTrack() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-24">
+      <SectionTitle kicker="Flash Track" title="L'actualité du sprint" />
+      <div className="grid auto-rows-[minmax(260px,auto)] gap-6 md:grid-cols-4">
+        {articles.slice(0, 5).map((a, i) => <ArticleCard key={a.id} article={a} featured={i === 0} />)}
       </div>
     </section>
   );
 }
 
-function SplitVideo() {
-  const ref = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [muted, setMuted] = useState(true);
-  const toggle = () => { const v = ref.current; if (!v) return; if (v.paused) { v.play(); setPlaying(true); } else { v.pause(); setPlaying(false); } };
+function Biomeca() {
   const stats = [
-    { label: "Vitesse de pointe", value: "43.9", unit: "km/h" },
-    { label: "Fréquence de foulée", value: "4.8", unit: "Hz" },
-    { label: "Temps de réaction", value: "0.128", unit: "s" },
+    { v: "40", u: "km/h", l: "Vitesse atteinte à 30m" },
+    { v: "4.8", u: "Hz", l: "Fréquence de foulée" },
+    { v: "0.128", u: "s", l: "Temps de réaction" },
+    { v: "0.09", u: "s", l: "Contact au sol" },
   ];
   return (
-    <section className="mx-auto grid max-w-7xl gap-10 px-4 py-24 lg:grid-cols-5">
-      <div className="relative overflow-hidden rounded-xl border border-border lg:col-span-3">
-        <video ref={ref} src={articles[2]!.videoUrl} poster={articles[1]!.image} muted={muted} loop playsInline className="aspect-video h-full w-full object-cover" />
-        <span className="absolute right-3 top-3"><CategoryBadge>4K</CategoryBadge></span>
-        <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 bg-fade p-4">
-          <button onClick={toggle} aria-label="Lecture" className="grid h-11 w-11 place-items-center rounded-full bg-primary text-primary-foreground glow-primary">{playing ? <Pause /> : <Play fill="currentColor" />}</button>
-          <button onClick={() => setMuted(!muted)} aria-label="Son" className="grid h-11 w-11 place-items-center rounded-full bg-secondary">{muted ? <VolumeX /> : <Volume2 />}</button>
-          <button onClick={() => ref.current?.requestFullscreen()} aria-label="Plein écran" className="ml-auto grid h-11 w-11 place-items-center rounded-full bg-secondary"><Maximize /></button>
+    <VideoSection src={vs.biomeca.bgVideoUrl} poster={vs.biomeca.poster} className="min-h-[75vh]">
+      <div className="grid gap-12 lg:grid-cols-2">
+        <div>
+          <Kicker>{vs.biomeca.kicker}</Kicker>
+          <h2 className="mt-3 text-5xl uppercase leading-none md:text-7xl">{vs.biomeca.title}</h2>
+          <p className="mt-6 max-w-lg text-lg text-foreground/80">{vs.biomeca.text}</p>
         </div>
-      </div>
-      <div className="flex flex-col justify-center lg:col-span-2">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Analyse technique</p>
-        <h2 className="mt-2 text-4xl uppercase leading-none md:text-5xl">La biomécanique des 30 premiers mètres</h2>
-        <p className="mt-4 text-muted-foreground">Comment un sprinteur passe de 0 à 40 km/h en moins de 4 secondes : inclinaison du buste, temps de contact au sol, puissance horizontale. Décryptage image par image.</p>
-        <div className="mt-8 grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-px self-end overflow-hidden rounded-lg border border-foreground/15 bg-foreground/15">
           {stats.map((s) => (
-            <div key={s.label} className="rounded-lg border border-border bg-card p-4">
-              <p className="font-display text-3xl text-primary text-glow">{s.value}<span className="text-sm">{s.unit}</span></p>
-              <p className="mt-1 text-[11px] uppercase text-muted-foreground">{s.label}</p>
+            <div key={s.l} className="bg-background/70 p-6 backdrop-blur">
+              <p className="font-display text-5xl">{s.v}<span className="ml-1 text-lg text-primary">{s.u}</span></p>
+              <p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">{s.l}</p>
             </div>
           ))}
         </div>
       </div>
+    </VideoSection>
+  );
+}
+
+function Dossiers() {
+  const picks = [articles[3]!, articles[4]!, articles[5]!];
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-24">
+      <SectionTitle kicker="Dossiers & Enquêtes" title="Grands formats" />
+      <div className="grid gap-10 md:grid-cols-3">
+        {picks.map((a) => (
+          <Link key={a.id} to="/article/$slug" params={{ slug: a.slug }} className="group block">
+            <div className="aspect-[3/4] overflow-hidden rounded-lg">
+              <img src={a.image} alt={a.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+            <div className="mt-5"><CategoryBadge>{a.category}</CategoryBadge></div>
+            <h3 className="mt-3 text-2xl uppercase leading-tight transition-colors group-hover:text-primary">{a.title}</h3>
+            <p className="mt-3 line-clamp-3 text-muted-foreground">{a.excerpt}</p>
+            <p className="mt-3 text-xs uppercase text-muted-foreground">{a.author} · <Clock className="inline h-3 w-3" /> {a.readTime} min</p>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
 
-function NewsGrid() {
-  const [cat, setCat] = useState<string>("Tous");
-  const list = cat === "Tous" ? articles.slice(0, 5) : articles.filter((a) => a.category === cat);
+function PhotoFinish() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12">
-      <SectionTitle kicker="Le fil" title="News & Reportages" />
-      <div className="mb-8 flex flex-wrap gap-2">
-        {categories.map((c) => (
-          <button key={c} onClick={() => setCat(c)} className={`relative rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ${cat === c ? "border-primary text-primary-foreground" : "border-border text-muted-foreground hover:text-foreground"}`}>
-            {cat === c && <motion.span layoutId="pill" className="absolute inset-0 rounded-full bg-primary" />}
-            <span className="relative">{c}</span>
+    <VideoSection src={vs.finish.bgVideoUrl} poster={vs.finish.poster} className="min-h-[55vh]">
+      <div className="max-w-3xl">
+        <Kicker>{vs.finish.kicker}</Kicker>
+        <h2 className="mt-3 text-5xl uppercase leading-none md:text-7xl">{vs.finish.title}</h2>
+        <p className="mt-6 text-lg text-foreground/80">{vs.finish.text}</p>
+        <p className="mt-8 font-display text-3xl uppercase">Record du monde 100m : <span className="text-primary">9.58</span></p>
+      </div>
+    </VideoSection>
+  );
+}
+
+function Rankings() {
+  const keys = Object.keys(rankings) as (keyof typeof rankings)[];
+  const [d, setD] = useState<keyof typeof rankings>("100m");
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-24">
+      <SectionTitle kicker="Classements" title="Chronos de référence" />
+      <div className="mb-6 flex gap-2">
+        {keys.map((k) => (
+          <button key={k} onClick={() => setD(k)} className={`relative rounded-full border px-5 py-2 font-display text-lg ${d === k ? "border-foreground text-background" : "border-border text-muted-foreground hover:text-foreground"}`}>
+            {d === k && <motion.span layoutId="rk" className="absolute inset-0 rounded-full bg-foreground" />}
+            <span className="relative">{k}</span>
           </button>
         ))}
       </div>
-      <motion.div layout className="grid auto-rows-[minmax(260px,auto)] gap-6 md:grid-cols-4">
-        <AnimatePresence mode="popLayout">
-          {list.length === 0 && <p className="text-muted-foreground">Aucun article dans cette catégorie pour le moment.</p>}
-          {list.map((a, i) => <ArticleCard key={a.id} article={a} featured={i === 0} />)}
-        </AnimatePresence>
-      </motion.div>
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full min-w-[600px] text-left">
+          <thead className="bg-secondary text-xs uppercase tracking-wider text-muted-foreground">
+            <tr><th className="p-4">#</th><th className="p-4">Athlète</th><th className="p-4">Pays</th><th className="p-4">Temps</th><th className="p-4">Passages</th><th className="p-4">Année</th></tr>
+          </thead>
+          <tbody>
+            {rankings[d].map((r) => (
+              <motion.tr key={d + r.rank} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="border-t border-border">
+                <td className="p-4 font-display text-xl text-muted-foreground">{r.rank}</td>
+                <td className="p-4 font-semibold">{r.athlete}</td>
+                <td className="p-4 text-muted-foreground">{r.country}</td>
+                <td className="p-4 font-display text-2xl text-primary">{r.time}</td>
+                <td className="p-4 text-sm text-muted-foreground">{r.splits}</td>
+                <td className="p-4 text-muted-foreground">{r.year}</td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
+  );
+}
+
+function Training() {
+  const pillars = [
+    { t: "Force maximale", d: "Squats et tirages lourds, 85–95 % du max, pour élever le plafond de force." },
+    { t: "Charge d'impact", d: "Pliométrie : jusqu'à 5 fois le poids du corps encaissé en moins de 0,1 s." },
+    { t: "Explosivité", d: "Lancers, sauts et départs résistés pour convertir la force en vitesse." },
+  ];
+  return (
+    <VideoSection src={vs.training.bgVideoUrl} poster={vs.training.poster} className="min-h-[70vh]">
+      <Kicker>{vs.training.kicker}</Kicker>
+      <h2 className="mt-3 max-w-3xl text-5xl uppercase leading-none md:text-7xl">{vs.training.title}</h2>
+      <p className="mt-6 max-w-2xl text-lg text-foreground/80">{vs.training.text}</p>
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
+        {pillars.map((p, i) => (
+          <div key={p.t} className="border-t border-foreground/30 pt-5">
+            <p className="font-display text-lg text-primary">0{i + 1}</p>
+            <h3 className="mt-1 text-2xl uppercase">{p.t}</h3>
+            <p className="mt-2 text-sm text-foreground/75">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </VideoSection>
+  );
+}
+
+function Spikes() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-24">
+      <SectionTitle kicker="Culture Spikes" title="L'évolution de la pointe" />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {spikeModels.map((s) => (
+          <div key={s.id} className="group overflow-hidden rounded-lg border border-border bg-card">
+            <div className="aspect-square overflow-hidden"><img src={s.image} alt={s.name} loading="lazy" className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0" /></div>
+            <div className="p-5">
+              <p className="font-display text-4xl text-primary">{s.era}</p>
+              <h3 className="mt-1 text-xl uppercase">{s.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.story}</p>
+              <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">Poids : {s.weight}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Manifesto() {
+  const [done, setDone] = useState(false);
+  return (
+    <VideoSection src={vs.manifesto.bgVideoUrl} poster={vs.manifesto.poster} className="min-h-[50vh]">
+      <div className="mx-auto max-w-3xl text-center">
+        <Kicker>{vs.manifesto.kicker}</Kicker>
+        <h2 className="mt-3 text-5xl uppercase leading-none md:text-7xl">{vs.manifesto.title}</h2>
+        <p className="mt-6 text-lg text-foreground/80">{vs.manifesto.text}</p>
+        {done ? (
+          <p className="mt-8 font-semibold text-primary">Bienvenue dans UNLEASHED. Prochaine édition vendredi.</p>
+        ) : (
+          <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="mx-auto mt-8 flex max-w-md gap-2">
+            <input required type="email" placeholder="Votre e-mail" className="flex-1 rounded-full border border-foreground/30 bg-background/60 px-5 py-3 outline-none backdrop-blur focus:border-primary" />
+            <button className="rounded-full bg-primary px-6 py-3 font-bold uppercase text-primary-foreground">S'abonner</button>
+          </form>
+        )}
+      </div>
+    </VideoSection>
   );
 }
 
@@ -110,12 +219,14 @@ function Home() {
   return (
     <main>
       <Hero />
-      <SplitVideo />
-      <NewsGrid />
-      <section className="mx-auto max-w-7xl px-4 py-24">
-        <SectionTitle kicker="Slow-Mo Zone" title="Video Vault" />
-        <VideoGrid videos={videos} />
-      </section>
+      <FlashTrack />
+      <Biomeca />
+      <Dossiers />
+      <PhotoFinish />
+      <Rankings />
+      <Training />
+      <Spikes />
+      <Manifesto />
     </main>
   );
 }

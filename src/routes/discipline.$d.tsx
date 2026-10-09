@@ -5,9 +5,9 @@ import { ListingPage } from "@/components/site/Cards";
 export const Route = createFileRoute("/discipline/$d")({
   head: ({ params }) => ({
     meta: [
-      { title: `${params.d} — Burst Track Media` },
+      { title: `${params.d} — UNLEASHED` },
       { name: "description", content: `Actualités, chronos et analyses du ${params.d}.` },
-      { property: "og:title", content: `${params.d} — Burst Track Media` },
+      { property: "og:title", content: `${params.d} — UNLEASHED` },
       { property: "og:description", content: `Actualités, chronos et analyses du ${params.d}.` },
     ],
   }),

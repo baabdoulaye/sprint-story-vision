@@ -5,9 +5,9 @@ import { ListingPage } from "@/components/site/Cards";
 export const Route = createFileRoute("/a-la-une")({
   head: () => ({
     meta: [
-      { title: "À la Une — Burst Track Media" },
+      { title: "À la Une — UNLEASHED" },
       { name: "description", content: "Les dernières enquêtes et actualités du sprint mondial." },
-      { property: "og:title", content: "À la Une — Burst Track Media" },
+      { property: "og:title", content: "À la Une — UNLEASHED" },
       { property: "og:description", content: "Les dernières enquêtes et actualités du sprint mondial." },
     ],
   }),

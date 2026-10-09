@@ -5,9 +5,9 @@ import { ListingPage } from "@/components/site/Cards";
 export const Route = createFileRoute("/science")({
   head: () => ({
     meta: [
-      { title: "Science & Entraînement — Burst Track Media" },
+      { title: "Science & Entraînement — UNLEASHED" },
       { name: "description", content: "Biomécanique, physiologie et nutrition du sprinteur d'élite." },
-      { property: "og:title", content: "Science & Entraînement — Burst Track Media" },
+      { property: "og:title", content: "Science & Entraînement — UNLEASHED" },
       { property: "og:description", content: "Biomécanique, physiologie et nutrition du sprinteur d'élite." },
     ],
   }),

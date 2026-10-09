@@ -5,9 +5,9 @@ import { ListingPage } from "@/components/site/Cards";
 export const Route = createFileRoute("/culture")({
   head: () => ({
     meta: [
-      { title: "Culture & Spikes — Burst Track Media" },
+      { title: "Culture & Spikes — UNLEASHED" },
       { name: "description", content: "Pointes, mental, rituels : la culture du sprint." },
-      { property: "og:title", content: "Culture & Spikes — Burst Track Media" },
+      { property: "og:title", content: "Culture & Spikes — UNLEASHED" },
       { property: "og:description", content: "Pointes, mental, rituels : la culture du sprint." },
     ],
   }),
