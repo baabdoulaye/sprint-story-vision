@@ -1,8 +1,3 @@
-import hero from "@/hero.jpg";
-import finish from "@/finish.jpg";
-import spikes from "@/spikes.jpg";
-import mental from "@/mental.jpg";
-
 export type Category =
   | "Diamond League"
   | "Biomécanique"
@@ -437,7 +432,7 @@ export const videoSections: Record<
     title: "Libérer la vitesse",
     text: "Dans les 0,5 premières secondes d'un 100m, tout se décide. Enquête au cœur du départ parfait.",
     bgVideoUrl: V1, // video_intro.mp4 (Introduction explosive en plein écran)
-    poster: hero,
+    poster: "hero",
   },
   biomeca: {
     id: "biomeca",
@@ -445,7 +440,7 @@ export const videoSections: Record<
     title: "Les 30 premiers mètres",
     text: "De 0 à 40 km/h en moins de 4 secondes : inclinaison du buste, temps de contact au sol, puissance horizontale. Le sprinteur monte les marches, appui après appui, jusqu'à se redresser.",
     bgVideoUrl: V3, // afafa_powell_side_view.mp4 (Parfait pour analyser la foulée latérale)
-    poster: hero,
+    poster: "biomeca",
   },
   finish: {
     id: "finish",
@@ -453,7 +448,7 @@ export const videoSections: Record<
     title: "La quête du millième",
     text: "À 12 m/s, un millième de seconde représente 1,2 centimètre. C'est l'épaisseur d'un torse penché qui sépare l'or de l'oubli.",
     bgVideoUrl: V4, // carmelita_jeter_vs_fraser_pryce.mp4 (Le duel serré sur la ligne)
-    poster: finish,
+    poster: "finish",
   },
   training: {
     id: "training",
@@ -461,7 +456,7 @@ export const videoSections: Record<
     title: "Forger l'explosivité",
     text: "Force maximale, pliométrie, charges d'impact : la vitesse se construit d'abord loin de la piste, sous la barre et sur les haies basses.",
     bgVideoUrl: V2, // carmelita_jeter_training.mp4 (Séance et travail de puissance)
-    poster: spikes,
+    poster: "spikes",
   },
   manifesto: {
     id: "manifesto",
@@ -469,7 +464,7 @@ export const videoSections: Record<
     title: "Dix secondes. Une vie entière.",
     text: "Le sprint ne pardonne rien et ne promet rien. Il exige tout, tout de suite. C'est pour ça qu'on l'aime.",
     bgVideoUrl: V5, // 100mhurdles_wr.mp4 (Course record d'intensité avant le footer)
-    poster: mental,
+    poster: "mental",
   },
 };
 
