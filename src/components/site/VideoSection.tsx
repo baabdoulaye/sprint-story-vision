@@ -40,6 +40,9 @@ export function BgVideo({ src, poster }: { src: string; poster: string | undefin
           muted
           playsInline
           preload="auto"
+          aria-hidden="true"
+          // @ts-ignore (si TS râle sur l'attribut fetchPriority)
+          fetchPriority="high"
           onCanPlay={() => setIsReady(true)}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             isReady ? "opacity-100" : "opacity-0"
@@ -47,7 +50,7 @@ export function BgVideo({ src, poster }: { src: string; poster: string | undefin
         />
       )}
       {/* VOILE NOIR LÉGER (on remet de la lumière dans la vidéo) */}
-      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/55 pointer-events-none" />
     </div>
   );
 }
