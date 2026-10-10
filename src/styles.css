@@ -61,29 +61,64 @@
   --ring: oklch(0.64 0.17 40);
   --glow-primary: 0 10px 30px -12px color-mix(in oklab, var(--primary) 45%, transparent);
   --glow-track: 0 10px 30px -12px color-mix(in oklab, var(--track) 45%, transparent);
-  --gradient-fade: linear-gradient(to top, var(--background) 5%, color-mix(in oklab, var(--background) 60%, transparent) 45%, transparent);
+  --gradient-fade: linear-gradient(
+    to top,
+    var(--background) 5%,
+    color-mix(in oklab, var(--background) 60%, transparent) 45%,
+    transparent
+  );
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0.01em; }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
 }
 
-@utility font-display { font-family: var(--font-display); }
-@utility glow-primary { box-shadow: var(--glow-primary); }
-@utility glow-track { box-shadow: var(--glow-track); }
-@utility text-glow { text-shadow: 0 0 18px color-mix(in oklab, var(--primary) 0%, transparent); }
-@utility bg-fade { background-image: var(--gradient-fade); }
-@utility animate-marquee { animation: marquee 40s linear infinite; }
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility glow-primary {
+  box-shadow: var(--glow-primary);
+}
+@utility glow-track {
+  box-shadow: var(--glow-track);
+}
+@utility text-glow {
+  text-shadow: 0 0 18px color-mix(in oklab, var(--primary) 0%, transparent);
+}
+@utility bg-fade {
+  background-image: var(--gradient-fade);
+}
+@utility animate-marquee {
+  animation: marquee 40s linear infinite;
+}
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-@utility video-veil { background-image: linear-gradient(to bottom, oklch(0 0 0 / 0.55), oklch(0 0 0 / 0.45) 40%, var(--background)); }
+@utility video-veil {
+  background-image: linear-gradient(
+    to bottom,
+    oklch(0 0 0 / 0.8),
+    oklch(0 0 0 / 0.7) 40%,
+    var(--background)
+  );
+}
