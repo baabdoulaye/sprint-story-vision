@@ -306,7 +306,7 @@ function Manifesto() {
               placeholder="Votre e-mail"
               className="flex-1 rounded-full border border-foreground/30 bg-background/60 px-5 py-3 outline-none backdrop-blur focus:border-primary"
             />
-            <button className="rounded-full bg-primary px-6 py-3 font-bold uppercase text-primary-foreground">
+            <button className="cursor-pointer rounded-full bg-primary px-6 py-3 font-bold uppercase text-primary-foreground transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-95 shadow-lg">
               S'abonner
             </button>
           </form>
