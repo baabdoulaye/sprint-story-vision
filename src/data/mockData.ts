@@ -1,7 +1,7 @@
-import hero from "@/assets/hero.jpg";
-import finish from "@/assets/finish.jpg";
-import spikes from "@/assets/spikes.jpg";
-import mental from "@/assets/mental.jpg";
+import hero from "@/hero.jpg";
+import finish from "@/finish.jpg";
+import spikes from "@/spikes.jpg";
+import mental from "@/mental.jpg";
 
 export type Category =
   | "Diamond League"
@@ -45,11 +45,11 @@ export interface Video {
   videoUrl: string;
 }
 
-const V1 = "src/assets/video_intro.mp4";
-const V2 = "src/assets/carmelita_jeter_training.mp4";
-const V3 = "src/assets/afafa_powell_side_view.mp4";
-const V4 = "src/assets/carmelita_jeter_vs_fraser_pryce.mp4";
-const V5 = "src/assets/100mhurdles_wr.mp4";
+const V1 = "/video_intro.mp4";
+const V2 = "/carmelita_jeter_training.mp4";
+const V3 = "/afafa_powell_side_view.mp4";
+const V4 = "/carmelita_jeter_vs_fraser_pryce.mp4";
+const V5 = "/100mhurdles_wr.mp4";
 
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600_000).toISOString();
 
@@ -77,7 +77,7 @@ export const articles: Article[] = [
     category: "Biomécanique",
     disciplines: ["60m", "100m"],
     tags: ["Départ", "Puissance", "Technique"],
-    image: "/src/assets/coleman_start.jpg",
+    image: "/coleman_start.jpg",
     videoUrl: V1,
     content: [
       {
@@ -144,7 +144,7 @@ export const articles: Article[] = [
     category: "JO & Mondiaux",
     disciplines: ["100m"],
     tags: ["Chrono", "Mondiaux", "Rivalités"],
-    image: "/src/assets/9.70.avif",
+    image: "/9.70.avif",
     videoUrl: V4,
     content: [
       {
@@ -201,7 +201,7 @@ export const articles: Article[] = [
     category: "Science",
     disciplines: ["60m", "200m", "400m"],
     tags: ["Physiologie", "Indoor", "Fibres rapides"],
-    image: "/src/assets/60m_wallpaper.jpg",
+    image: "/60m_wallpaper.jpg",
     videoUrl: V5,
     content: [
       {
@@ -258,7 +258,7 @@ export const articles: Article[] = [
     category: "Matériel & Pointes",
     disciplines: ["100m", "200m", "400m"],
     tags: ["Carbone", "Innovation", "Réglementation"],
-    image: "/src/assets/50-best-track-spikes-21282144-1440.jpg",
+    image: "/50-best-track-spikes-21282144-1440.jpg",
     videoUrl: V3,
     content: [
       {
@@ -312,7 +312,7 @@ export const articles: Article[] = [
     category: "Science",
     disciplines: ["100m", "200m"],
     tags: ["Nutrition", "Récupération", "Masse maigre"],
-    image: "/src/assets/assiette-healthy-food.jpg",
+    image: "/assiette-healthy-food.jpg",
     videoUrl: V2,
     content: [
       {
@@ -366,7 +366,7 @@ export const articles: Article[] = [
     category: "Culture",
     disciplines: ["100m", "200m", "400m", "4x100m"],
     tags: ["Mental", "Focus", "Rituels"],
-    image: "/src/assets/Call-room-more.jpg",
+    image: "/Call-room-more.jpg",
     videoUrl: V1,
     content: [
       {
@@ -601,7 +601,7 @@ export const spikeModels: SpikeModel[] = [
     era: "1936",
     weight: "~350 g",
     story: "Cuir cousu main, clous fixes : la chaussure de Jesse Owens à Berlin.",
-    image: "/src/assets/spikes_1936.jpg",
+    image: "/spikes_1936.jpg",
   },
   {
     id: "s2",
@@ -609,7 +609,7 @@ export const spikeModels: SpikeModel[] = [
     era: "1968",
     weight: "~220 g",
     story: "Arrivée du tartan à Mexico et des semelles à clous vissés.",
-    image: "/src/assets/spikes_1968.webp",
+    image: "/spikes_1968.webp",
   },
   {
     id: "s3",
@@ -617,7 +617,7 @@ export const spikeModels: SpikeModel[] = [
     era: "1996",
     weight: "~110 g",
     story: "Une pointe dorée ultra-légère pour un 19.32 historique à Atlanta.",
-    image: "/src/assets/spikes_1996.jpg",
+    image: "/spikes_1996.jpg",
   },
   {
     id: "s4",
@@ -625,7 +625,7 @@ export const spikeModels: SpikeModel[] = [
     era: "2020+",
     weight: "~130 g",
     story: "Mousse haute restitution et plaque rigide : la révolution actuelle.",
-    image: "/src/assets/nike-super-spikes_s.avif",
+    image: "/nike-super-spikes_s.avif",
   },
 ];
 
